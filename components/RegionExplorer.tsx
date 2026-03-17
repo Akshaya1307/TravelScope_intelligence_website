@@ -49,11 +49,7 @@ interface RegionDetails {
   peakSeason: string;
   offPeakSeason: string;
   bestTimeToVisit: string;
-  resources: {
-    name: string;
-    url: string;
-    description?: string;
-  }[];
+  // Removed resources interface
 }
 
 /* ================= STATIC DATA WITH REALISTIC SEASONAL VARIATION ================= */
@@ -97,6 +93,7 @@ const seasonalRegionData: RegionSeasonalData[] = [
 ];
 
 /* ================= REGION DETAILS WITH SEASONAL INFO ================= */
+// Removed all resources arrays from region details
 
 const regionDetailsMap: Record<string, RegionDetails> = {
   Asia: {
@@ -105,12 +102,7 @@ const regionDetailsMap: Record<string, RegionDetails> = {
     peakSeason: "Peak seasons: Spring (March-May) and Autumn (September-November) with mild temperatures and cherry blossoms. Revenue peaks at $4.8M.",
     offPeakSeason: "Off-peak: Summer monsoon (June-August) and Winter cold (December-February) in northern regions. Revenue drops to $2.1M.",
     bestTimeToVisit: "Best times: March-May for Japan/Korea, November-February for Southeast Asia to avoid monsoon.",
-    resources: [
-      { name: "Visit Asia", url: "https://www.dookinternational.com/blog/best-countries-to-visit-in-asia/", description: "Official tourism board" },
-      { name: "Facilities Provided", url: "https://www.tripadvisor.in/TripBuilder", description: "Comprehensive guide" },
-      { name: "Top Asian Attractions", url: "https://landmarksarchitects.com/famous-architecture-in-asia/", description: "Must-see destinations" },
-      { name: "Seasonal Travel Tips", url: "https://transrentals.in/blog/seasonal-travel-guide-best-destinations-every-season", description: "Best times to visit each region" }
-    ]
+    // Removed resources array
   },
   Europe: {
     revenueOverview: "Europe's revenue is heavily concentrated in summer months, with peak season generating 50% more revenue than base. Winter sees a dramatic 46% drop except for Christmas markets.",
@@ -118,12 +110,7 @@ const regionDetailsMap: Record<string, RegionDetails> = {
     peakSeason: "Peak season: June-August (summer) with revenue hitting $4.2M. December holidays also see mini-peaks.",
     offPeakSeason: "Off-peak: November-March (excluding December holidays). Revenue drops to $1.5M with limited attractions.",
     bestTimeToVisit: "Best times: May-June or September-October for pleasant weather and fewer crowds.",
-    resources: [
-      { name: "European Travel Commission", url: "https://www.viator.com/Europe/d6-ttd?m=33953&supag=1232553616119671&supca=676994599&supsc=kwd-77034959897084&supai=77034734770859&supdv=c&supnt=nt:o&suplp=157600&supli=&supti=kwd-77034959897084&tsem=true&supci=kwd-77034959897084&supkw=top%20places%20in%20europe%20to%20visit&gclid=33d330ccfc1319069ee05978e18405fb&gclsrc=3p.ds&msclkid=33d330ccfc1319069ee05978e18405fb" },
-      { name: "Europe Facilities", url: "https://www.radissonhotels.com/en-us/" },
-      { name: "European Heritage Sites", url: "https://en.wikipedia.org/wiki/List_of_World_Heritage_Sites_in_Western_Europe" },
-      { name: "Watch Europe in Rail", url: "https://www.raileurope.com/destinations/passes/eurail-global-pass?gclid=98fd594f7382142d156b30fb6d560fed&gclsrc=3p.ds&msclkid=98fd594f7382142d156b30fb6d560fed&utm_source=bing&utm_medium=cpc&utm_campaign=INA%20-%20ENG%20-%20GOO%20-%20Eurail%20pass&utm_term=europass%20train%20map&utm_content=Competitor%20-%20EUROPASS", description: "When to visit each country" }
-    ]
+    // Removed resources array
   },
   "North America": {
     revenueOverview: "North America sees 57% revenue increase during summer months, with significant drops in winter except for ski destinations.",
@@ -131,12 +118,7 @@ const regionDetailsMap: Record<string, RegionDetails> = {
     peakSeason: "Peak seasons: Summer (June-August) at $3.3M and Fall foliage (September-October) at $2.8M.",
     offPeakSeason: "Off-peak: Winter (December-March) at $1.2M, excluding ski resorts which have their own peak.",
     bestTimeToVisit: "Best times: Late spring (May) or early fall (September) for national parks.",
-    resources: [
-      { name: "Visit The USA", url: "https://www.kayak.co.in/United-States-Hotels.253.dc.html?sck=SEM&skipapp=true" },
-      { name: "Parks Canada", url: "https://parks.canada.ca/index" },
-      { name: "North America Road Trips", url: "https://www.lonelyplanet.com/articles/usa-best-road-trips" },
-      { name: "National Park Seasons", url: "https://www.travel-experience-live.com/best-months-to-visit-national-parks-calendar/", description: "When to visit each park" }
-    ]
+    // Removed resources array
   },
   Oceania: {
     revenueOverview: "Oceania experiences 60% revenue surge during December-February summer, with winter dropping by 40% due to colder weather in southern regions.",
@@ -144,12 +126,7 @@ const regionDetailsMap: Record<string, RegionDetails> = {
     peakSeason: "Peak seasons: December-February (summer) at $2.4M. Great for beaches and outdoor activities.",
     offPeakSeason: "Off-peak: June-August (winter) at $0.9M. Better for whale watching and skiing in NZ.",
     bestTimeToVisit: "Best times: March-May or September-November for mild weather and fewer crowds.",
-    resources: [
-      { name: "Tourism Australia", url: "https://www.tripadvisor.in/Attractions-g255055-Activities-Australia.html" },
-      { name: "Tourism New Zealand", url: "https://www.tripadvisor.in/Attractions-g255104-Activities-New_Zealand.html" },
-      { name: "Pacific Island Guide", url: "https://www.tripadvisor.in/Attractions-g150786-Activities-c57-t20-Pacific_Coast.html" },
-      { name: "Seasonal Calendar", url: "https://www.journeysouthtravel.com/post/seasonal-guide-to-the-pacific-islands", description: "When to visit each island" }
-    ]
+    // Removed resources array
   },
   "South America": {
     revenueOverview: "South America shows 58% revenue increase during December-February summer, with June-August winter dropping by 33% except for Andes ski regions.",
@@ -157,12 +134,7 @@ const regionDetailsMap: Record<string, RegionDetails> = {
     peakSeason: "Peak seasons: December-February (summer) at $1.9M. Includes Carnival in Rio and Patagonia trekking.",
     offPeakSeason: "Off-peak: June-August (winter) at $0.8M. Better for Amazon visits (dry season) and Andes skiing.",
     bestTimeToVisit: "Best times: Shoulder seasons (March-May, September-November) for balanced weather.",
-    resources: [
-      { name: "South America Travel", url: "https://www.southamerica.travel/" },
-      { name: "Andes Explorer", url: "https://www.belmond.com/trains/south-america/peru/belmond-andean-explorer/", description: "Mountain trekking guides" },
-      { name: "Amazon Tours", url: "https://www.rainforestexpeditions.com/?gdp=affilired&_affclk=adn%3A3817%3A%3A4c9bfdfa75dc13e7fb7f944e5532f532%3A8002y1", description: "Rainforest expeditions" },
-      { name: "Seasonal Guide", url: "https://www.tourow.com/best-time-to-travel-to-south-america/", description: "When to visit each country" }
-    ]
+    // Removed resources array
   },
   default: {
     revenueOverview: "This region shows significant seasonal variation in tourism revenue.",
@@ -170,9 +142,7 @@ const regionDetailsMap: Record<string, RegionDetails> = {
     peakSeason: "Peak travel season aligns with favorable climate conditions and major holidays.",
     offPeakSeason: "Off-peak season sees reduced tourism due to weather or fewer events.",
     bestTimeToVisit: "Shoulder seasons often offer the best balance of weather and crowds.",
-    resources: [
-      { name: "Official Tourism Board", url: "#" }
-    ]
+    // Removed resources array
   }
 };
 
@@ -184,7 +154,6 @@ const CustomTooltip = ({ active, payload, label }: any) => {
     return (
       <div className="bg-slate-800 border border-slate-700 p-4 rounded-lg shadow-xl min-w-[200px]">
         <p className="font-semibold text-white text-lg">{label}</p>
-        {/* Updated: revenue color to primary */}
         <p className="text-primary mt-1 text-xl font-bold">
           ${payload[0].value.toLocaleString()}
         </p>
@@ -289,14 +258,12 @@ export default function RegionExplorer() {
       className="scroll-mt-28 py-24 bg-gradient-to-b from-background-dark to-background-mid"
     >
       <div className="space-y-6 max-w-7xl mx-auto px-6">
-        {/* Header with centered premium title - UPDATED */}
+        {/* Header with centered premium title */}
         <div className="mb-12 text-center">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-slate-800/50 backdrop-blur-sm border border-slate-700 mb-4">
-            {/* Updated: badge icon to primary */}
             <Sparkles className="w-4 h-4 text-primary" />
             <span className="text-sm text-slate-300">Regional Intelligence</span>
           </div>
-          {/* Updated: main title gradient */}
           <h1 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-primary via-accent to-purple-500 bg-clip-text text-transparent tracking-tight">
             Regional Performance Explorer
           </h1>
@@ -315,7 +282,6 @@ export default function RegionExplorer() {
                 <select
                   value={selectedYear}
                   onChange={(e) => setSelectedYear(e.target.value)}
-                  // Updated: focus ring to primary
                   className="w-full bg-slate-800 text-white px-4 py-2.5 rounded-lg border border-slate-700 focus:outline-none focus:ring-2 focus:ring-primary cursor-pointer"
                 >
                   {years.map(year => (
@@ -329,7 +295,6 @@ export default function RegionExplorer() {
                 <select
                   value={selectedSeason}
                   onChange={(e) => setSelectedSeason(e.target.value)}
-                  // Updated: focus ring to primary
                   className="w-full bg-slate-800 text-white px-4 py-2.5 rounded-lg border border-slate-700 focus:outline-none focus:ring-2 focus:ring-primary cursor-pointer"
                 >
                   <option>All Seasons (Base)</option>
@@ -352,7 +317,6 @@ export default function RegionExplorer() {
               <div className="flex flex-wrap items-center gap-2 mt-4 pt-4 border-t border-slate-800">
                 <span className="text-sm text-slate-400">Active filters:</span>
                 {selectedYear !== "2024" && (
-                  // Updated: year chip to primary
                   <span className="px-3 py-1 bg-primary/20 text-primary rounded-full text-sm border border-primary/30">
                     Year: {selectedYear}
                   </span>
@@ -423,7 +387,6 @@ export default function RegionExplorer() {
                   className="cursor-pointer"
                 >
                   {filteredData.map((entry, index) => {
-                    // Updated: default to primary, selected to primary-light
                     let fillColor = "#4f46e5"; // primary
                     
                     if (selectedSeason === "Peak") {
@@ -499,7 +462,7 @@ export default function RegionExplorer() {
           </div>
         </div>
 
-        {/* Summary Cards - Updated first card to primary */}
+        {/* Summary Cards */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <div className="bg-slate-900/40 backdrop-blur-md border border-slate-800 p-4 rounded-xl">
             <div className="flex items-center space-x-3">
@@ -631,46 +594,13 @@ function RegionDetails({
         <div className="space-y-2">
           <p className="text-slate-300">{details.offPeakSeason}</p>
           <div className="flex items-center space-x-2 mt-2">
-            {/* Updated: off-peak icon to accent/blue? Keeping blue for rain */}
             <CloudRain className="w-4 h-4 text-blue-400" />
             <span className="text-sm text-slate-400">Revenue: ${(seasonalData.offPeakRevenue/1e6).toFixed(1)}M</span>
           </div>
         </div>
       )
-    },
-    {
-      id: "resources",
-      title: "Traveler Resources",
-      icon: ExternalLink,
-      content: (
-        <ul className="space-y-2">
-          {details.resources.map((resource, index) => (
-            <li key={index}>
-              <a
-                href={resource.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group flex items-center p-3 rounded-lg bg-slate-800/50 hover:bg-slate-800 transition-all"
-              >
-                <div className="flex-1">
-                  {/* Updated: resource links to primary */}
-                  <span className="text-primary font-medium group-hover:text-primary-light">
-                    {resource.name}
-                  </span>
-                  {resource.description && (
-                    <p className="text-sm text-slate-400 mt-0.5">
-                      {resource.description}
-                    </p>
-                  )}
-                </div>
-                {/* Updated: external link hover to primary */}
-                <ExternalLink className="w-4 h-4 text-slate-500 group-hover:text-primary transition-colors ml-2" />
-              </a>
-            </li>
-          ))}
-        </ul>
-      )
     }
+    // Removed resources section completely
   ], [details, seasonalData, peakDiff, offPeakDiff]);
 
   return (
@@ -715,7 +645,6 @@ function RegionDetails({
             >
               <div className="flex items-center space-x-3">
                 <div className="w-8 h-8 rounded-lg bg-slate-800 flex items-center justify-center">
-                  {/* Updated: section icons to primary */}
                   <Icon className="w-4 h-4 text-primary" />
                 </div>
                 <span className="font-medium text-slate-200">{title}</span>
@@ -747,10 +676,7 @@ function RegionDetails({
                 .findIndex(r => r.region === region) + 1}
             </p>
           </div>
-          <div className="bg-slate-800/30 rounded-lg p-3">
-            <p className="text-xs text-slate-500">Resources</p>
-            <p className="text-lg font-semibold text-white">{details.resources.length}</p>
-          </div>
+          {/* Removed the Resources count card */}
         </div>
         <p className="text-xs text-slate-500 mt-3 text-center">
           Best time to visit: {details.bestTimeToVisit}
