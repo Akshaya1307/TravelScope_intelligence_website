@@ -212,22 +212,22 @@ export default function DashboardSection() {
             </h2>
           </div>
 
-          {/* POWER BI - REMOVED WHITE BACKGROUND */}
-          <div className="rounded-2xl overflow-hidden border border-border shadow-2xl mb-12 bg-transparent">
-            <iframe
-              title="Power BI Dashboard"
-              width="100%"
-              height="700"
-              src={POWER_BI_EMBED_LINK}
-              frameBorder="0"
-              allowFullScreen
-              className="w-full h-full"
-              style={{
-                backgroundColor: "transparent",
-                border: "none",
-                display: "block"
-              }}
-            />
+          {/* POWER BI - FIXED SHRINKING ISSUE */}
+          <div className="w-full rounded-2xl overflow-hidden border border-border shadow-2xl mb-12 bg-transparent">
+            <div className="relative w-full" style={{ paddingBottom: "56.25%" }}> {/* 16:9 aspect ratio */}
+              <iframe
+                title="Power BI Dashboard"
+                src={POWER_BI_EMBED_LINK}
+                frameBorder="0"
+                allowFullScreen
+                className="absolute top-0 left-0 w-full h-full"
+                style={{
+                  backgroundColor: "transparent",
+                  border: "none",
+                  display: "block"
+                }}
+              />
+            </div>
           </div>
 
           {/* KPI CARDS */}
