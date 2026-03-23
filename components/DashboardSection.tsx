@@ -215,7 +215,7 @@ export default function DashboardSection() {
           </div>
 
           {/* POWER BI */}
-          <div className="rounded-2xl overflow-hidden border border-border shadow-2xl mb-12">
+          <div className="rounded-2xl overflow-hidden border border-border shadow-2xl mb-12 bg-[#121212]">
             <iframe
               title="Power BI Dashboard"
               width="100%"
