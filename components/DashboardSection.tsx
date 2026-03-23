@@ -123,10 +123,9 @@ export default function DashboardSection() {
     fetch("/api/powerbi/regions")
       .then(res => res.json())
       .then((data: any[]) => {
-        console.log("Raw API data:", data); // Debug log
+        console.log("Raw API data:", data);
         
         const formatted: RegionData[] = data.map((item) => {
-          // Safely extract and convert values
           const revenue = item.TotalRevenue || item["[TotalRevenue]"] || 0;
           const avgStay = item.AvgStay || item["[AvgStay]"] || 0;
           
@@ -137,7 +136,6 @@ export default function DashboardSection() {
           };
         });
 
-        console.log("Formatted data:", formatted); // Debug log
         setRegions(formatted);
 
         if (formatted.length > 0) {
@@ -214,8 +212,8 @@ export default function DashboardSection() {
             </h2>
           </div>
 
-          {/* POWER BI */}
-          <div className="rounded-2xl overflow-hidden border border-border shadow-2xl mb-12 bg-[#121212]">
+          {/* POWER BI - REMOVED WHITE BACKGROUND */}
+          <div className="rounded-2xl overflow-hidden border border-border shadow-2xl mb-12 bg-transparent">
             <iframe
               title="Power BI Dashboard"
               width="100%"
@@ -223,8 +221,9 @@ export default function DashboardSection() {
               src={POWER_BI_EMBED_LINK}
               frameBorder="0"
               allowFullScreen
+              className="w-full h-full"
               style={{
-                backgroundColor: "#121212",
+                backgroundColor: "transparent",
                 border: "none",
                 display: "block"
               }}
