@@ -96,7 +96,7 @@ const tourismData: Record<string, { place: string; description: string }[]> = {
 export default function DashboardSection() {
 
   const POWER_BI_EMBED_LINK =
-    "https://app.powerbi.com/view?r=eyJrIjoiY2YwZDdlM2ItYjMwYi00NWU1LTgyOWMtZmQ1NjgyNGE3MDIxIiwidCI6IjhmYWQ5NzYxLWZhZGItNDFiNi04YTFkLWRjMDVkNWRjNGY5YiJ9";
+    "https://app.powerbi.com/view?r=eyJrIjoiZmVlZDQ2OGUtMmRmMC00OThhLWE1MzgtMjU3NmI4YmRmNDgxIiwidCI6IjhmYWQ5NzYxLWZhZGItNDFiNi04YTFkLWRjMDVkNWRjNGY5YiJ9";
 
   const [metrics, setMetrics] = useState<Metrics | null>(null);
   const [regions, setRegions] = useState<RegionData[]>([]);
