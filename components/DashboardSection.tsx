@@ -223,6 +223,11 @@ export default function DashboardSection() {
               src={POWER_BI_EMBED_LINK}
               frameBorder="0"
               allowFullScreen
+              style={{
+                backgroundColor: "#121212",
+                border: "none",
+                display: "block"
+              }}
             />
           </div>
 
