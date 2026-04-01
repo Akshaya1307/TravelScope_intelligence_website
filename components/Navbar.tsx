@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import { 
@@ -18,6 +18,7 @@ export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [activeSection, setActiveSection] = useState('home');
   const pathname = usePathname();
   const router = useRouter();
 
@@ -49,6 +50,58 @@ export default function Navbar() {
     };
   }, [isOpen]);
 
+  // 🔥 IMPROVED SCROLL SPY with better detection
+  useEffect(() => {
+    const handleScrollSpy = () => {
+      const sections = ['home', 'dashboard', 'insights', 'about'];
+      
+      // Find the current section based on scroll position
+      let currentSection = '';
+      
+      for (const section of sections) {
+        const element = document.getElementById(section);
+        if (element) {
+          const rect = element.getBoundingClientRect();
+          const offset = 150; // Offset for navbar height
+          
+          // Check if section is in view
+          if (rect.top <= offset && rect.bottom >= offset) {
+            currentSection = section;
+            break;
+          }
+        }
+      }
+      
+      // If no section is found, check which section is closest to the top
+      if (!currentSection) {
+        let minDistance = Infinity;
+        for (const section of sections) {
+          const element = document.getElementById(section);
+          if (element) {
+            const rect = element.getBoundingClientRect();
+            const distance = Math.abs(rect.top - 150);
+            if (distance < minDistance) {
+              minDistance = distance;
+              currentSection = section;
+            }
+          }
+        }
+      }
+      
+      if (currentSection && currentSection !== activeSection) {
+        setActiveSection(currentSection);
+      }
+    };
+    
+    // Run on mount and on scroll
+    handleScrollSpy();
+    window.addEventListener('scroll', handleScrollSpy);
+    
+    return () => {
+      window.removeEventListener('scroll', handleScrollSpy);
+    };
+  }, [activeSection]);
+
   const handleLogout = () => {
     localStorage.removeItem('isLoggedIn');
     localStorage.removeItem('loginTimestamp');
@@ -56,58 +109,56 @@ export default function Navbar() {
     router.push('/login');
   };
 
-  const scrollToSection = (sectionId: string) => {
-    const id = sectionId.replace('#', '');
-    const element = document.getElementById(id);
-
+  const scrollToSection = useCallback((sectionId: string) => {
+    const element = document.getElementById(sectionId);
+    
     if (element) {
+      setActiveSection(sectionId);
       setIsOpen(false);
-      element.scrollIntoView({
-        behavior: 'smooth',
-        block: 'start'
+      
+      const offset = 80; // Offset for navbar height
+      const elementPosition = element.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - offset;
+      
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
       });
     }
-  };
+  }, []);
 
   const navLinks = [
-    { href: '/', label: 'Home', icon: Home },
-    { href: '#dashboard', label: 'Dashboard', icon: LayoutDashboard },
-    { href: '#insights', label: 'Insights', icon: BarChart3 },
-    { href: '#about', label: 'About', icon: Info },
+    { href: '/', label: 'Home', icon: Home, sectionId: 'home' },
+    { href: '#dashboard', label: 'Dashboard', icon: LayoutDashboard, sectionId: 'dashboard' },
+    { href: '#insights', label: 'Insights', icon: BarChart3, sectionId: 'insights' },
+    { href: '#about', label: 'About', icon: Info, sectionId: 'about' },
   ];
 
-  const isActive = (href: string) => {
-    if (href === '/') return pathname === href;
-    return false;
+  const isActive = (sectionId: string) => {
+    return activeSection === sectionId;
   };
 
-  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
-    if (href.startsWith('#')) {
-      e.preventDefault();
-      scrollToSection(href);
-    }
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, sectionId: string) => {
+    e.preventDefault();
+    scrollToSection(sectionId);
   };
 
   if (!isLoggedIn) {
     return (
-      // Updated: navbar background
       <nav className={`fixed w-full z-50 transition-all duration-300 ${
         scrolled ? 'bg-background-mid/95 backdrop-blur-md border-b border-slate-800 py-3' : 'bg-transparent py-5'
       }`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center">
             <Link href="/login" className="group flex items-center space-x-2">
-              {/* Updated: logo gradient */}
               <div className="w-8 h-8 bg-gradient-to-br from-primary to-accent rounded-lg flex items-center justify-center">
                 <span className="text-white font-bold text-lg">TS</span>
               </div>
-              {/* Updated: text gradient */}
               <span className="text-xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent hidden sm:block">
                 TravelScope
               </span>
             </Link>
 
-            {/* Updated: login button gradient */}
             <Link
               href="/login"
               className="px-5 py-2 bg-gradient-to-r from-primary to-accent text-white rounded-lg font-semibold hover:brightness-110 transition-all duration-200 flex items-center gap-2"
@@ -123,7 +174,6 @@ export default function Navbar() {
 
   return (
     <>
-      {/* Updated: navbar background */}
       <nav
         className={`fixed w-full z-50 transition-all duration-300 ${
           scrolled
@@ -134,8 +184,8 @@ export default function Navbar() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center">
 
-            {/* Logo - Updated gradients */}
-            <Link href="/" className="group flex items-center space-x-2">
+            {/* Logo */}
+            <Link href="/" className="group flex items-center space-x-2" onClick={() => scrollToSection('home')}>
               <div className="w-8 h-8 bg-gradient-to-br from-primary to-accent rounded-lg flex items-center justify-center">
                 <span className="text-white font-bold text-lg">TS</span>
               </div>
@@ -144,26 +194,25 @@ export default function Navbar() {
               </span>
             </Link>
 
-            {/* Desktop Navigation - Updated active state */}
+            {/* Desktop Navigation */}
             <div className="hidden md:flex items-center space-x-2">
               {navLinks.map((link) => (
-                <a
+                <button
                   key={link.label}
-                  href={link.href}
-                  onClick={(e) => handleNavClick(e, link.href)}
-                  className={`px-4 py-2 rounded-lg transition-all duration-200 flex items-center gap-2 ${
-                    isActive(link.href)
-                      ? 'text-primary bg-primary/10'
+                  onClick={() => scrollToSection(link.sectionId)}
+                  className={`px-4 py-2 rounded-lg transition-all duration-200 flex items-center gap-2 cursor-pointer ${
+                    isActive(link.sectionId)
+                      ? 'text-primary bg-primary/10 border-b-2 border-primary'
                       : 'text-slate-300 hover:text-white hover:bg-slate-800/50'
                   }`}
                 >
                   <link.icon className="w-4 h-4" />
                   {link.label}
-                </a>
+                </button>
               ))}
             </div>
 
-            {/* Logout - Keep red for logout action */}
+            {/* Logout */}
             <div className="hidden md:flex">
               <button
                 onClick={handleLogout}
@@ -184,7 +233,7 @@ export default function Navbar() {
           </div>
         </div>
 
-        {/* Mobile Navigation - Updated background */}
+        {/* Mobile Navigation */}
         <div
           className={`fixed inset-x-0 top-[73px] bg-background-mid/95 backdrop-blur-md border-b border-slate-800 md:hidden transition-all duration-300 transform ${
             isOpen 
@@ -194,15 +243,21 @@ export default function Navbar() {
         >
           <div className="px-4 py-6 space-y-4">
             {navLinks.map((link) => (
-              <a
+              <button
                 key={link.label}
-                href={link.href}
-                onClick={(e) => handleNavClick(e, link.href)}
-                className="block px-4 py-2 rounded-lg text-slate-300 hover:text-white hover:bg-slate-800 flex items-center gap-2"
+                onClick={() => {
+                  scrollToSection(link.sectionId);
+                  setIsOpen(false);
+                }}
+                className={`w-full text-left px-4 py-2 rounded-lg flex items-center gap-2 cursor-pointer ${
+                  isActive(link.sectionId)
+                    ? 'text-primary bg-primary/10 border-l-2 border-primary'
+                    : 'text-slate-300 hover:text-white hover:bg-slate-800'
+                }`}
               >
                 <link.icon className="w-4 h-4" />
                 {link.label}
-              </a>
+              </button>
             ))}
 
             <div className="pt-4 mt-4 border-t border-slate-800">
